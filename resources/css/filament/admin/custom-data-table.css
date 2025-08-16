@@ -1,0 +1,167 @@
+/*
+ * Custom Data Table Styles
+ * Inherits from Filament PHP base styles and theme customizations
+ * Uses Tailwind CSS classes with Filament's design system
+ */
+
+/* Table header and footer containers */
+.es-table__header-ctn,
+.es-table__footer-ctn {
+    @apply divide-y divide-gray-200 dark:divide-white/10 min-h-12;
+    @apply bg-white dark:bg-gray-900;
+    @apply border-gray-200 dark:border-white/10;
+}
+
+/* Table structure and spacing */
+.es-table {
+    @apply w-full;
+    @apply bg-white dark:bg-gray-900;
+    @apply border-collapse;
+
+    /* Row group styling */
+    .es-table__rowgroup {
+        @apply divide-y divide-gray-200 dark:divide-white/10;
+
+        /* First column padding */
+        td:first-child {
+            @apply pl-12;
+            @apply text-gray-950 dark:text-white;
+        }
+
+        /* Last column padding */
+        td:last-child {
+            @apply pr-12;
+        }
+
+        /* Row styling */
+        .es-table__row {
+            @apply hover:bg-gray-50 dark:hover:bg-white/5;
+            @apply transition-colors duration-75;
+
+            >td {
+                @apply px-3 py-4;
+                @apply text-sm;
+                @apply text-gray-950 dark:text-white;
+                @apply border-gray-200 dark:border-white/10;
+
+                /* Second column - allow text wrapping */
+                &:nth-child(2) {
+                    @apply break-words;
+                    word-wrap: break-word;
+                    word-break: break-word;
+                    white-space: normal;
+                }
+
+                /* Third column - allow text wrapping */
+                &:nth-child(3) {
+                    @apply break-words;
+                    word-wrap: break-word;
+                    word-break: break-word;
+                    white-space: normal;
+                }
+
+                /* Fourth column - prevent wrapping */
+                &:nth-child(4) {
+                    @apply whitespace-nowrap;
+                }
+            }
+        }
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .es-table .es-table__rowgroup {
+        td:first-child {
+            @apply pl-4;
+        }
+
+        td:last-child {
+            @apply pr-4;
+        }
+    }
+}
+
+/*
+ * Custom Table Component Styles
+ * Inherits from both Filament PHP (fi-ta-table) and custom theme styles (es-table)
+ * Provides consistent styling that combines both design systems
+ */
+
+/* Enhanced table styling that inherits from Filament */
+.fi-ta-table.es-table {
+    /* Inherit Filament's base table styles */
+    @apply shadow-sm ring-1 ring-gray-950/5 dark:ring-white/10;
+    @apply rounded-xl overflow-hidden;
+
+    /* Apply custom theme colors and spacing */
+    @apply bg-white dark:bg-gray-900;
+    @apply border-collapse;
+
+    /* Header styling that matches Filament's design */
+    thead {
+        @apply bg-gray-50 dark:bg-white/5;
+
+        th {
+            @apply px-3 py-3;
+            @apply text-sm font-semibold;
+            @apply text-gray-950 dark:text-white;
+            @apply border-b border-gray-200 dark:border-white/10;
+            @apply bg-gray-50 dark:bg-white/5;
+        }
+    }
+
+    /* Body styling that inherits from both systems */
+    tbody.es-table__rowgroup {
+        tr {
+            @apply hover:bg-gray-50 dark:hover:bg-white/5;
+            @apply transition-colors duration-75;
+            @apply border-b border-gray-200 dark:border-white/10;
+
+            /* Cell styling that matches Filament's fi-ta-cell */
+            td {
+                @apply px-3 py-4;
+                @apply text-sm;
+                @apply text-gray-950 dark:text-white;
+                @apply align-top;
+
+                /* First column padding (matches Filament's pattern) */
+                &:first-child {
+                    @apply pl-6;
+                }
+
+                /* Last column padding */
+                &:last-child {
+                    @apply pr-6;
+                }
+
+                /* Responsive padding adjustments */
+                @media (max-width: 768px) {
+                    &:first-child {
+                        @apply pl-4;
+                    }
+
+                    &:last-child {
+                        @apply pr-4;
+                    }
+                }
+            }
+        }
+
+        /* Striped rows (optional, matches Filament's striped tables) */
+        tr:nth-child(even) {
+            @apply bg-gray-50/50 dark:bg-white/[0.02];
+        }
+    }
+}
+
+/* Container styling that matches Filament's table containers */
+.es-table__header-ctn {
+    @apply rounded-xl;
+    @apply bg-white dark:bg-gray-900;
+    @apply shadow-sm ring-1 ring-gray-950/5 dark:ring-white/10;
+    @apply overflow-hidden;
+
+    /* Remove default borders since we're using ring */
+    @apply border-0;
+}
