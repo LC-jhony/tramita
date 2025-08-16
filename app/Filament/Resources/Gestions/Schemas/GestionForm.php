@@ -36,7 +36,7 @@ class GestionForm
                     ->label('Nombre')
                     ->required(),
                 TextInput::make('namagement')
-                    ->label('Gestión')
+                    ->label('Alcalde')
                     ->required(),
                 Toggle::make('active')
                     ->label('Activo')

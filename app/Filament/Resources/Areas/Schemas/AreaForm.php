@@ -18,7 +18,6 @@ class AreaForm
                 Section::make("hola")
                     ->columnSpanFull()
                     ->schema([
-
                         TextInput::make('name')
                             ->label('Nombre')
                             ->placeholder('Secretaria'),

@@ -15,6 +15,9 @@ class DocumentTypesTable
     public static function configure(Table $table): Table
     {
         return $table
+            ->striped()
+            ->paginated([5, 10, 25, 50, 100, 'all'])
+            ->defaultPaginationPageOption(5)
             ->columns([
                 TextColumn::make('name')
                     ->searchable(),

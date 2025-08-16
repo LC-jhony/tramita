@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Gestions\Tables;
 
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
@@ -15,18 +16,27 @@ class GestionsTable
     public static function configure(Table $table): Table
     {
         return $table
+            ->striped()
+            ->paginated([5, 10, 25, 50, 100, 'all'])
+            ->defaultPaginationPageOption(5)
             ->columns([
                 TextColumn::make('start_year')
-                    ->numeric()
+                    ->label('Año Inicio')
+                    ->searchable()
                     ->sortable(),
                 TextColumn::make('end_year')
-                    ->numeric()
+                    ->label('Año Fin')
+                    ->searchable()
                     ->sortable(),
                 TextColumn::make('name')
+                    ->label('Nombre')
                     ->searchable(),
                 TextColumn::make('namagement')
+                    ->label('Alcalde')
                     ->searchable(),
                 IconColumn::make('active')
+                    ->label('Estado')
+                    ->searchable()
                     ->boolean(),
                 TextColumn::make('created_at')
                     ->dateTime()
@@ -38,11 +48,16 @@ class GestionsTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+//                SelectFilter::make('namagement')
+//                    ->label('Alcalde')
+//                    ->options(Gestion::all()->pluck('namagement', 'id'))
+//                    ->searchable()
+//                    ->native(false)
             ])
             ->recordActions([
                 ViewAction::make(),
                 EditAction::make(),
+                DeleteAction::make()
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
