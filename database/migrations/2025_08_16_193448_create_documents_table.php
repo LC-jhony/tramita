@@ -45,7 +45,6 @@ return new class extends Migration
             // Índices para consultas frecuentes
             $table->index('status');
             $table->index('origen');
-
         });
     }
 
