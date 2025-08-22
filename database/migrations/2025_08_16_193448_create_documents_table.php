@@ -31,7 +31,7 @@ return new class extends Migration
             $table->unsignedBigInteger('gestion_id');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('folio');
-            $table->date('receip_date');
+            //$table->date('receip_date');
             $table->date('reception_date')->nullable();
             $table->string('file_path');
             $table->string('condition');

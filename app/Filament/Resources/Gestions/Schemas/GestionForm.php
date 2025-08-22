@@ -45,7 +45,6 @@ class GestionForm
                     ->reactive()
                     ->afterStateUpdated(function ($state, $set) {
                         $set('active', $state);
-
                         // En lugar de emitir un evento usamos una notificación
                         if ($state) {
                             session()->now('filament.notifications', [
