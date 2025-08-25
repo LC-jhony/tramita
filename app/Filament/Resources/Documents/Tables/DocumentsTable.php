@@ -44,16 +44,16 @@ class DocumentsTable
                     ->searchable(),
                 TextColumn::make('empresa')
                     ->searchable(),
-                TextColumn::make('documentTypes.name')
+                TextColumn::make('documentType.name')
                     ->numeric()
                     ->sortable(),
-                TextColumn::make('area_oreigen_id')
+                TextColumn::make('areaOrigen.name')
                     ->numeric()
                     ->sortable(),
-                TextColumn::make('gestion_id')
-                    ->numeric()
+                TextColumn::make('gestion.name')
+                    ->badge()
                     ->sortable(),
-                TextColumn::make('user_id')
+                TextColumn::make('user.name')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('folio')

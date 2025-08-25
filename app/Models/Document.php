@@ -2,14 +2,16 @@
 
 namespace App\Models;
 
+use App\Models\Area;
+use App\Models\User;
 use App\Models\DocumentType;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Document extends Model
 {
     protected $fillable = [
-
         'representation',
         'full_name',
         'first_name',
@@ -35,8 +37,35 @@ class Document extends Model
         'condition',
         'status',
     ];
-    public function documentTypes()
+    public function documentType(): BelongsTo
     {
-        return $this->hasMany(DocumentType::class);
+        return $this->belongsTo(
+            DocumentType::class,
+            'document_type_id'
+        );
+    }
+
+    public function areaOrigen(): BelongsTo
+    {
+        return $this->belongsTo(
+            Area::class,
+            'area_oreigen_id'
+        );
+    }
+
+    public function gestion(): BelongsTo
+    {
+        return $this->belongsTo(
+            Gestion::class,
+            'gestion_id'
+        );
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(
+            User::class,
+            'user_id'
+        );
     }
 }

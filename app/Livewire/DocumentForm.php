@@ -21,6 +21,7 @@ use Asmit\FilamentUpload\Enums\PdfViewFit;
 use Filament\Actions\Contracts\HasActions;
 use Filament\Schemas\Contracts\HasSchemas;
 use Filament\Forms\Components\ToggleButtons;
+use Ysfkaya\FilamentPhoneInput\Forms\PhoneInput;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Asmit\FilamentUpload\Forms\Components\AdvancedFileUpload;
@@ -91,15 +92,18 @@ class DocumentForm extends Component implements HasActions, HasSchemas
                                     ]),
                                 Grid::make()
                                     ->schema([
-                                        TextInput::make('phone')
+                                        PhoneInput::make('phone')
                                             ->label('Celular | Telefono')
-                                            ->tel()
-                                            ->telRegex('/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.\/0-9]*$/')
+                                            ->defaultCountry('PE')
                                             ->required()
+                                            ->validationAttribute('telefono')
+
+
                                         ,
                                         TextInput::make('email')
                                             ->label('Correo electronico')
-                                            ->rules(['required' => 'El campo es requerido'])
+                                            ->email()
+                                            ->required()
                                             ->unique(Document::class, 'email', ignoreRecord: true),
                                         TextInput::make('address')
                                             ->label('direccion')
