@@ -1,10 +1,10 @@
 @import '../../../../vendor/filament/filament/resources/css/theme.css';
+/* @import 'custom-data-table.css'; */
 
 @source '../../../../app/Filament/**/*';
 @source '../../../../resources/views/filament/**/*';
 
-/* @import 'custom-data-table.css';
-@config 'tailwind.config.js'; */
+/* @config 'tailwind.config.js'; */
 
 .fi-topbar {
     @apply !bg-inherit ring-0 shadow-none;
@@ -13,5 +13,3 @@
 .fi-sidebar-header {
     @apply !bg-inherit ring-0 shadow-none;
 }
-
-/*--- table------*/
