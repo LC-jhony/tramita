@@ -96,7 +96,7 @@ class DocumentForm extends Component implements HasActions, HasSchemas
                                             ->tel()
                                             ->telRegex('/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.\/0-9]*$/')
                                             ->required()
-                                            ->validationAttribute(['required' => 'El campo es requerido']),
+                                        ,
                                         TextInput::make('email')
                                             ->label('Correo electronico')
                                             ->rules(['required' => 'El campo es requerido'])

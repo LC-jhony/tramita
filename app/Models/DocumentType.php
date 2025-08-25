@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class DocumentType extends Model
 {
-    use HasUuids;
     protected $fillable = [
         'name',
         'code',

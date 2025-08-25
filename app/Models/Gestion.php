@@ -18,8 +18,8 @@ class Gestion extends Model
     ];
     protected $casts = [
         'start_year' => 'integer',
-        'end_year'   => 'integer',
-        'active'     => 'boolean',
+        'end_year' => 'integer',
+        'active' => 'boolean',
     ];
     protected static function booted(): void
     {
@@ -57,7 +57,7 @@ class Gestion extends Model
                 if ($overlaps) {
                     throw ValidationException::withMessages([
                         'start_year' => 'Las gestiones no pueden solaparse con otra existente.',
-                        'end_year'   => 'Las gestiones no pueden solaparse con otra existente.',
+                        'end_year' => 'Las gestiones no pueden solaparse con otra existente.',
                     ]);
                 }
             }

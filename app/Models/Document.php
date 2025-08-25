@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class Document extends Model
 {
-    use HasUuids;
     protected $fillable = [
 
         'representation',
