@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Document;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 
 class Gestion extends Model
@@ -72,5 +74,9 @@ class Gestion extends Model
                     ->update(['active' => false]);
             }
         });
+    }
+    public function documents(): HasMany
+    {
+        return $this->hasMany(Document::class);
     }
 }

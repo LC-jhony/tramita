@@ -11,6 +11,7 @@ use App\Filament\Resources\DocumentTypes\Schemas\DocumentTypeInfolist;
 use App\Filament\Resources\DocumentTypes\Tables\DocumentTypesTable;
 use App\Models\DocumentType;
 use BackedEnum;
+use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -22,7 +23,7 @@ class DocumentTypeResource extends Resource
     protected static ?string $modelLabel = "Tipo";
 
     protected static string|BackedEnum|null $navigationIcon = 'solar-documents-bold-duotone';
-
+    protected static string|UnitEnum|null $navigationGroup = 'Configuracion';
     public static function form(Schema $schema): Schema
     {
         return DocumentTypeForm::configure($schema);

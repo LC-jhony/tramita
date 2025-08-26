@@ -5,8 +5,10 @@ namespace App\Models;
 use App\Models\Area;
 use App\Models\User;
 use App\Models\DocumentType;
+use App\Models\DocumentMovement;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Document extends Model
@@ -67,5 +69,29 @@ class Document extends Model
             User::class,
             'user_id'
         );
+    }
+    public function currentArea(): BelongsTo
+    {
+        return $this->belongsTo(Area::class, 'current_area_id');
+    }
+
+    public function movements(): HasMany
+    {
+        return $this->hasMany(DocumentMovement::class);
+    }
+
+    public function histories(): HasMany
+    {
+        return $this->hasMany(DocumentHistorie::class);
+    }
+
+    public function activeMovement()
+    {
+        return $this->movements()->where(
+            'status',
+            'pending'
+        )
+            ->latest()
+            ->first();
     }
 }
