@@ -1,0 +1,12 @@
+@import '../../../../vendor/filament/filament/resources/css/theme.css';
+
+@source '../../../../app/Filament/User/**/*';
+@source '../../../../resources/views/filament/user/**/*';
+
+.fi-topbar {
+    @apply !bg-inherit ring-0 shadow-none;
+}
+
+.fi-sidebar-header {
+    @apply !bg-inherit ring-0 shadow-none;
+}

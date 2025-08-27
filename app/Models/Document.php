@@ -6,6 +6,7 @@ use App\Models\Area;
 use App\Models\User;
 use App\Models\DocumentType;
 use App\Models\DocumentMovement;
+use App\Models\DocumentAttachment;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -83,6 +84,16 @@ class Document extends Model
     public function histories(): HasMany
     {
         return $this->hasMany(DocumentHistorie::class);
+    }
+
+    public function attachments(): HasMany
+    {
+        return $this->hasMany(DocumentAttachment::class);
+    }
+
+    public function activeAttachments(): HasMany
+    {
+        return $this->hasMany(DocumentAttachment::class)->where('is_active', true);
     }
 
     public function activeMovement()

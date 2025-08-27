@@ -3,9 +3,12 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Area;
+use App\Models\Document;
+use App\Models\DocumentMovement;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -44,5 +47,24 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+    public function area()
+    {
+        return $this->belongsTo(Area::class);
+    }
+
+    public function documents()
+    {
+        return $this->hasMany(Document::class);
+    }
+
+    public function movements()
+    {
+        return $this->hasMany(DocumentMovement::class);
+    }
+
+    public function histories()
+    {
+        return $this->hasMany(DocumentHistorie::class);
     }
 }

@@ -38,8 +38,38 @@ class DocumentMovementRelationManager extends RelationManager
                     ->searchable()
                     ->preload()
                     ->required(),
+                Select::make('assigned_to')
+                    ->label('Asignado a')
+                    ->relationship('assignedTo', 'name')
+                    ->searchable()
+                    ->preload(),
+                Select::make('priority')
+                    ->label('Prioridad')
+                    ->options([
+                        'low' => 'Baja',
+                        'normal' => 'Normal',
+                        'high' => 'Alta',
+                        'urgent' => 'Urgente',
+                    ])
+                    ->default('normal')
+                    ->required(),
+                Select::make('movement_type')
+                    ->label('Tipo de Derivación')
+                    ->options([
+                        'information' => 'Para Información',
+                        'action' => 'Para Acción',
+                        'approval' => 'Para Aprobación',
+                        'review' => 'Para Revisión',
+                        'archive' => 'Para Archivo',
+                    ])
+                    ->default('information')
+                    ->required(),
+                DateTimePicker::make('due_date')
+                    ->label('Fecha Límite'),
                 Textarea::make('observations')
                     ->label('Observaciones'),
+                Textarea::make('instructions')
+                    ->label('Instrucciones'),
                 Select::make('status')
                     ->options([
                         'pending' => 'Pendiente',
@@ -61,11 +91,44 @@ class DocumentMovementRelationManager extends RelationManager
             ->recordTitleAttribute('id')
             ->columns([
                 TextColumn::make('fromArea.name')
-                    ->label('Desde Área'),
+                    ->label('Desde Área')
+                    ->sortable(),
                 TextColumn::make('toArea.name')
-                    ->label('Hacia Área'),
+                    ->label('Hacia Área')
+                    ->sortable(),
                 TextColumn::make('user.name')
-                    ->label('Usuario'),
+                    ->label('Derivado por')
+                    ->sortable(),
+                TextColumn::make('assignedTo.name')
+                    ->label('Asignado a')
+                    ->placeholder('Sin asignar'),
+                TextColumn::make('priority')
+                    ->badge()
+                    ->color(fn(string $state): string => match ($state) {
+                        'low' => 'success',
+                        'normal' => 'primary',
+                        'high' => 'warning',
+                        'urgent' => 'danger',
+                    })
+                    ->formatStateUsing(fn(string $state): string => match ($state) {
+                        'low' => 'Baja',
+                        'normal' => 'Normal',
+                        'high' => 'Alta',
+                        'urgent' => 'Urgente',
+                    })
+                    ->label('Prioridad')
+                    ->sortable(),
+                TextColumn::make('movement_type')
+                    ->badge()
+                    ->color('info')
+                    ->formatStateUsing(fn(string $state): string => match ($state) {
+                        'information' => 'Información',
+                        'action' => 'Acción',
+                        'approval' => 'Aprobación',
+                        'review' => 'Revisión',
+                        'archive' => 'Archivo',
+                    })
+                    ->label('Tipo'),
                 TextColumn::make('status')
                     ->badge()
                     ->color(fn(string $state): string => match ($state) {
@@ -80,10 +143,18 @@ class DocumentMovementRelationManager extends RelationManager
                         'rejected' => 'Rechazado',
                         'processed' => 'Procesado',
                     })
-                    ->label('Estado'),
+                    ->label('Estado')
+                    ->sortable(),
+                TextColumn::make('due_date')
+                    ->dateTime('d/m/Y H:i')
+                    ->label('Fecha Límite')
+                    ->color(fn($record) => $record->isOverdue() ? 'danger' : ($record->isDueSoon() ? 'warning' : null))
+                    ->placeholder('Sin fecha límite')
+                    ->sortable(),
                 TextColumn::make('created_at')
-                    ->dateTime()
-                    ->label('Fecha de Creación'),
+                    ->dateTime('d/m/Y H:i')
+                    ->label('Fecha de Creación')
+                    ->sortable(),
             ])
             ->filters([
                 //
